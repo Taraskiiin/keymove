@@ -1,43 +1,48 @@
-const player = document.getElementById("walk__point");
-let moveStepY = 0;
-let moveStepX = 0;
-const pointMoveDown = () => {
-    moveStepY += 15;
-    if (moveStepY > -15 && moveStepY < 435) {
-        player.style.top = moveStepY + "px";
+class Player {
+    constructor(player, moveStepX, moveStepY) {
+        this.player = player,
+        this.moveStepX = moveStepX,
+        this.moveStepY = moveStepY
+    }
+    pointMoveDown(){
+        this.moveStepY += 15;
+        if (this.moveStepY > -15 && this.moveStepY < 435) {
+            this.player.style.top = this.moveStepY + "px";
+        }
+    }
+    pointMoveUp(){
+        this.moveStepY -= 15;
+        if (this.moveStepY > -15 && this.moveStepY < 435) {  
+            this.player.style.top = this.moveStepY + "px";
+        }
+    }
+    pointMoveLeft(){
+        this.moveStepX -= 15;
+        if (this.moveStepX > -15 && this.moveStepX < 985) {  
+            this.player.style.left = this.moveStepX + "px";
+        }
+    }
+    pointMoveRight(){
+        this.moveStepX += 15;
+        if (this.moveStepX > -15 && this.moveStepX < 985) {
+            this.player.style.left = this.moveStepX + "px";
+        }
     }
 }
-const pointMoveUp = () => {
-    moveStepY -= 15;
-    if (moveStepY > -15 && moveStepY < 435) {
-        player.style.top = moveStepY + "px";
-    }
-}
-const pointMoveLeft = () => {
-    moveStepX -= 15;
-    if (moveStepX > -15 && moveStepX < 985) {
-        player.style.left = moveStepX + "px";
-    }
-}
-function pointMoveRight() {
-    moveStepX += 15;
-    if (moveStepX > -15 && moveStepX < 985) {
-        player.style.left = moveStepX + "px";
-    }
-}
+const player = new Player(document.getElementById("walk__point"), 0, 0);
 document.addEventListener('keydown', function (event) {
     switch (event.keyCode) {
         case 40:
-            pointMoveDown();
+            player.pointMoveDown();
             break;
         case 38:
-            pointMoveUp();
+            player.pointMoveUp();
             break;
         case 39:
-            pointMoveRight();
+            player.pointMoveRight();
             break;
         case 37:
-            pointMoveLeft();
+            player.pointMoveLeft();
             break;
     }
 });
